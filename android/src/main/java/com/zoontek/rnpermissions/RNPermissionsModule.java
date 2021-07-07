@@ -396,7 +396,7 @@ public class RNPermissionsModule extends ReactContextBaseJavaModule implements P
     }
   }
 
-  @override
+  @Override
   public boolean onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
     try {
       Request request = mRequests.get(requestCode);
