@@ -396,12 +396,16 @@ public class RNPermissionsModule extends ReactContextBaseJavaModule implements P
     }
   }
 
-  @Override
+  @override
   public boolean onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-    Request request = mRequests.get(requestCode);
-    request.callback.invoke(grantResults, getPermissionAwareActivity(), request.rationaleStatuses);
-    mRequests.remove(requestCode);
-    return mRequests.size() == 0;
+    try {
+      Request request = mRequests.get(requestCode);
+      request.callback.invoke(grantResults, getPermissionAwareActivity(), request.rationaleStatuses);
+      mRequests.remove(requestCode);
+      return mRequests.size() == 0;
+    }catch (NullPointerException e){
+      return false;
+    }
   }
 
   private PermissionAwareActivity getPermissionAwareActivity() {
